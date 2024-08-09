@@ -1,3 +1,5 @@
+import MovieSearch from "../Search";
+
 const MovieRecs: React.FC = () => {
   const pageTitle = "Movie Recs";
 
@@ -5,6 +7,7 @@ const MovieRecs: React.FC = () => {
     <main>
       <div className="container">
         <h1>{pageTitle}</h1>
+        <MovieSearch />
       </div>
     </main>
   );

@@ -1,6 +1,6 @@
 import Papa from "papaparse";
 
-import { IMovieRawData } from "@/model/movie";
+import { IMovieRawData } from "@/models/movie";
 import { SelectSearchOption } from "react-select-search";
 
 const parseCSV = (csvData: string): IMovieRawData[] => {

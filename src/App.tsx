@@ -1,4 +1,4 @@
-import MovieRecs from "./component/HOC/MovieRecs";
+import MovieRecs from "./components/HOC/MovieRecs";
 import "./App.css";
 import "./index.css";
 

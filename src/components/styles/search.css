@@ -119,6 +119,12 @@ body.is-light-mode .select-search-container {
     overflow: auto;
     max-height: 36vh;
     scrollbar-width: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.1s ease-out,
+        visibility 0.1s cubic-bezier(0.165, 0.84, 0.44, 1),
+        transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .select-search-container:not(.select-search-is-multiple) .select-search-select {
@@ -128,11 +134,14 @@ body.is-light-mode .select-search-container {
     right: 0;
     left: 0;
     border-radius: 12px;
-    display: none;
 }
 
 .select-search-container:not(.select-search-is-multiple).select-search-has-focus .select-search-select {
-    display: block;
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    transition: opacity 0.3s ease-out,
+        transform 0.3s cubic-bezier(0.075, 0.82, 0.165, 1);
 }
 
 .select-search-has-focus .select-search-select {
@@ -205,30 +214,18 @@ body.is-light-mode .select-search-container {
     align-items: center;
     gap: .8rem;
     cursor: pointer;
+}
 
-    .icon-container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        width: 22px;
-        height: 22px;
-        padding: 0.8rem;
-        border-radius: 12px;
-        position: relative;
-        transition: border 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
-    }
+.chips-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: start;
+    gap: .4rem;
+}
 
-    .icon-container.has-background {
-        border: #313244 solid 2px;
-        background-color: #121212;
-    }
-
-    .icon-container.has-background:hover {
-        border: #89b4fa solid 2px;
-    }
-
-    .icon-container.icon-container.has-background:focus {
-        outline: none;
-        border: #89b4fa solid 2px;
-    }
+.movies-container {
+    display: flex;
+    flex-direction: column;
+    align-items: self-start;
+    gap: .8rem;
 }

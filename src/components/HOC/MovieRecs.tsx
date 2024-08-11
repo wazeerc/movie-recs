@@ -1,4 +1,5 @@
 import MovieSearch from "../Search";
+import "./MovieRecs.css";
 
 const MovieRecs: React.FC = () => {
   const pageTitle = "Movie Recs";

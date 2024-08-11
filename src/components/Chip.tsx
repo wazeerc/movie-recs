@@ -1,14 +1,25 @@
+import ResetIcon from "./IconButton";
+import "./styles/Chip.css";
+
 interface ChipProps {
-  label: string;
-  onDelete?: () => void;
+  selectedMovies: string;
+  onDelete: () => void;
 }
 
-const Chip: React.FC<ChipProps> = ({ label, onDelete }) => {
+const Chip: React.FC<ChipProps> = ({ selectedMovies, onDelete }) => {
   return (
-    <div>
-      <span>{label}</span>
-      {onDelete && <button onClick={onDelete}>&times;</button>}
-    </div>
+    <>
+      <div className="chip">
+        <label>{selectedMovies}</label>
+        <ResetIcon
+          state="active"
+          color="#89b4fa"
+          size={20}
+          onreset={() => onDelete()}
+          icon="clear"
+        />
+      </div>
+    </>
   );
 };
 

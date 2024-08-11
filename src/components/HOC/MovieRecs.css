@@ -1,1 +1,9 @@
-.main {}
+main {
+    .container {
+        display: flex;
+        flex-direction: column;
+        align-items: start;
+        justify-content: center;
+        margin-bottom: 12rem;
+    }
+}

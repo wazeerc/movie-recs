@@ -1,0 +1,25 @@
+.chip {
+    display: flex;
+    align-items: center;
+    height: fit-content;
+    border-radius: 26px;
+    border: 2px #313244 solid;
+    gap: .4rem;
+    padding: .4rem .6rem .4rem .8rem;
+
+    label {
+        font-size: .9rem;
+    }
+
+    .icon-container.chip {
+        border: none;
+        border: transparent solid 2px;
+        padding: .2rem;
+        transition: border 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+
+    .icon-container.chip:focus {
+        outline: none;
+        border: #89b4fa solid 2px;
+    }
+}

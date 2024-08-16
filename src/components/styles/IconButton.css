@@ -1,0 +1,32 @@
+.icon-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 22px;
+    height: 22px;
+    padding: 0.8rem;
+    border-radius: 12px;
+    position: relative;
+    transition: border 0.2s cubic-bezier(0.075, 0.82, 0.165, 1);
+    cursor: pointer;
+}
+
+.icon-container.reset-btn {
+    border: #313244 solid 2px;
+    background-color: #121212;
+}
+
+.icon-container.reset-btn:hover {
+    border: #89b4fa solid 2px;
+}
+
+.icon-container.reset-btn:focus {
+    outline: none;
+    border: #89b4fa solid 2px;
+}
+
+.icon-container.disabled {
+    pointer-events: none;
+    opacity: 0.5;
+    cursor: not-allowed;
+}

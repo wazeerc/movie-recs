@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SelectSearch, {
   SelectedOptionValue,
   SelectSearchOption,
 } from "react-select-search";
 
-import getMovies from "../utils/DataFetching";
+import { setFocus } from "@/utils/Utils";
+import getMovies from "@/utils/DataFetching";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
 import "./styles/Search.css";
@@ -12,64 +13,79 @@ import "./styles/Search.css";
 const MovieSearch: React.FC = () => {
   const MAX_SELECTIONS = 3;
 
+  const isMounted = useRef(false);
   const [movieOptions, setMovieOptions] = useState<SelectSearchOption[]>([]);
   const [selectedMovies, setSelectedMovies] = useState<string[]>([]);
 
   useEffect(() => {
     (async () => {
+      isMounted.current = true;
       const movieOptions = await getMovies();
       setMovieOptions(movieOptions);
     })();
   }, []);
 
-  useEffect(() => {
-    const dropdownElement: HTMLDivElement = document.querySelector(
-      ".select-search-select"
-    ) as HTMLDivElement;
-    if (dropdownElement) {
-      if (selectedMovies.length >= MAX_SELECTIONS) {
-        dropdownElement.style.display = "none";
-      } else if (selectedMovies.length) {
-        const inputElement = document.querySelector(
-          ".select-search-input"
-        ) as HTMLInputElement;
-        dropdownElement.style.display = "";
-        inputElement.focus();
-      }
-    }
-  }, [selectedMovies]);
-
-  const handleChange = (
+  const selectMovie = (
     selectedValue: SelectedOptionValue | SelectedOptionValue[]
   ): void => {
-    const newMovie = selectedValue as string;
+    const selectedMovie = selectedValue as string;
     if (
-      !selectedMovies.includes(newMovie) &&
+      !selectedMovies.includes(selectedMovie) &&
       selectedMovies.length < MAX_SELECTIONS
     ) {
-      setSelectedMovies([...selectedMovies, newMovie]);
+      setSelectedMovies([...selectedMovies, selectedMovie]);
     }
   };
 
-  const handleDelete = (movieToDelete: string) => {
-    setSelectedMovies(
-      selectedMovies.filter((movie) => movie !== movieToDelete)
-    );
+  const deleteMovie = (movieToDelete: string): void => {
+    setSelectedMovies((prevSelectedMovies) => {
+      const updatedMovies = prevSelectedMovies.filter(
+        (movie) => movie !== movieToDelete
+      );
+      hideDropdown(updatedMovies.length, MAX_SELECTIONS);
+      return updatedMovies;
+    });
+    focusOnSearch();
   };
 
-  const handleReset = (): void => {
+  const resetMovie = (): void => {
     setSelectedMovies([]);
+    hideDropdown(0, MAX_SELECTIONS);
+    focusOnSearch();
+  };
+
+  /**
+   * @param blur - Optional parameter to specify whether to blur the input element after focusing.
+   */
+  const focusOnSearch = (blur: boolean = false): void => {
     const inputElement = document.querySelector(
       ".select-search-input"
     ) as HTMLInputElement;
+    if (inputElement) {
+      setFocus(inputElement);
+      if (blur) inputElement.blur();
+    }
+  };
+
+  const hideDropdown = (
+    selectedMoviesLength: number,
+    MAX_SELECTIONS: number
+  ): void => {
     const dropdownElement = document.querySelector(
       ".select-search-select"
     ) as HTMLDivElement;
-    dropdownElement.style.display = "";
 
-    setTimeout(() => {
-      inputElement.focus();
-    }, 0);
+    if (selectedMoviesLength >= MAX_SELECTIONS) {
+      if (dropdownElement) dropdownElement.style.display = "none";
+      focusOnSearch(true);
+    } else {
+      if (dropdownElement) dropdownElement.style.display = "";
+    }
+  };
+
+  const isSearchDisabled = (): boolean => {
+    hideDropdown(selectedMovies.length, MAX_SELECTIONS);
+    return selectedMovies.length >= MAX_SELECTIONS;
   };
 
   return (
@@ -80,7 +96,7 @@ const MovieSearch: React.FC = () => {
             <Chip
               key={index}
               selectedMovies={movie}
-              onDelete={() => handleDelete(movie)}
+              onDelete={() => deleteMovie(movie)}
             />
           ))}
         </section>
@@ -91,15 +107,15 @@ const MovieSearch: React.FC = () => {
             )}
             value=""
             placeholder="Search for your favorite movies"
-            onChange={handleChange}
+            onChange={selectMovie}
             autoComplete="on"
             emptyMessage="Nothing found, you either have bad taste or you can't type..."
-            disabled={selectedMovies.length >= 3}
+            disabled={isSearchDisabled()}
             closeOnSelect={false}
             search
           />
           <ResetIcon
-            onreset={handleReset}
+            onreset={resetMovie}
             state={selectedMovies.length > 0 ? "active" : "disabled"}
             size={20}
             color="#eee"

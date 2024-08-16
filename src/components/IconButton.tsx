@@ -77,26 +77,40 @@ const ResetIcon = (props: IResetIconProps) => {
     icon,
   } = props;
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (state === "disabled") {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    onReset();
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (state === "disabled") {
+      e.preventDefault();
+      e.stopPropagation();
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      e.stopPropagation();
+      onReset();
+    }
+  };
+
   return (
-    <>
-      <div
-        className={`icon-container ${icon === "clear" ? "chip" : "reset-btn"}`}
-        onClick={onReset}
-        tabIndex={0}
-        onKeyDown={(e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            e.stopPropagation();
-            onReset();
-          }
-        }}
-        role="button"
-      >
-        {icon === "clear"
-          ? ClearSVG(color, size)
-          : ResetSVG(color, size, state)}
-      </div>
-    </>
+    <div
+      className={`icon-container ${icon === "clear" ? "chip" : "reset-btn"} ${
+        state === "disabled" ? "disabled" : ""
+      }`}
+      onClick={handleClick}
+      tabIndex={state === "disabled" ? -1 : 0}
+      onKeyDown={handleKeyDown}
+      role="button"
+    >
+      {icon === "clear" ? ClearSVG(color, size) : ResetSVG(color, size, state)}
+    </div>
   );
 };
 

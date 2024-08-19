@@ -4,11 +4,12 @@ import SelectSearch, {
   SelectSearchOption,
 } from "react-select-search";
 
-import { setFocus } from "@/utils/Utils";
-import getMovies from "@/utils/DataFetching";
+import { setFocus } from "@/utils/utils";
+// import getMovies from "@/utils/dataFetching";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
 import "./styles/Search.css";
+import fetchMovies from "@/utils/dataFetching";
 
 const MovieSearch: React.FC = () => {
   const MAX_SELECTIONS = 3;
@@ -20,7 +21,7 @@ const MovieSearch: React.FC = () => {
   useEffect(() => {
     (async () => {
       isMounted.current = true;
-      const movieOptions = await getMovies();
+      const movieOptions = await fetchMovies();
       setMovieOptions(movieOptions);
     })();
   }, []);

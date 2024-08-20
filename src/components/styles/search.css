@@ -157,8 +157,9 @@ body.is-light-mode .select-search-container {
 .select-search-not-found {
     display: block;
     height: 42px;
+    height: max-content;
     width: 100%;
-    padding: 0 16px;
+    padding: 10px 16px;
     background: var(--select-search-background);
     border: none;
     outline: none;

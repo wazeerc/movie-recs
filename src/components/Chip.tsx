@@ -10,7 +10,7 @@ const Chip: React.FC<ChipProps> = ({ selectedMovies, onDelete }) => {
   return (
     <>
       <div className="chip">
-        <label>{selectedMovies}</label>
+        <span>{selectedMovies}</span>
         <ResetIcon
           state="active"
           color="#89b4fa"

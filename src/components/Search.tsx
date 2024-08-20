@@ -1,29 +1,31 @@
-import { useEffect, useRef, useState } from "react";
+import "./styles/Search.css";
+import { useState } from "react";
+import useEffectWithMount from "@/hooks/useEffectWithMount";
 import SelectSearch, {
   SelectedOptionValue,
   SelectSearchOption,
 } from "react-select-search";
 
-import { setFocus } from "@/utils/Utils";
-import getMovies from "@/utils/DataFetching";
+import { setFocus } from "@/utils/utils";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
-import "./styles/Search.css";
 
-const MovieSearch: React.FC = () => {
+interface IMovieSearchProps {
+  data: SelectSearchOption[];
+}
+
+const MovieSearch: React.FC<IMovieSearchProps> = (props) => {
+  const { data } = props;
   const MAX_SELECTIONS = 3;
 
-  const isMounted = useRef(false);
   const [movieOptions, setMovieOptions] = useState<SelectSearchOption[]>([]);
   const [selectedMovies, setSelectedMovies] = useState<string[]>([]);
 
-  useEffect(() => {
+  useEffectWithMount(() => {
     (async () => {
-      isMounted.current = true;
-      const movieOptions = await getMovies();
-      setMovieOptions(movieOptions);
+      setMovieOptions(data);
     })();
-  }, []);
+  }, [data]);
 
   const selectMovie = (
     selectedValue: SelectedOptionValue | SelectedOptionValue[]

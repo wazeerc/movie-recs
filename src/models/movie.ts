@@ -31,7 +31,7 @@ export interface IMovieRawData {
   Response: string;
 }
 
-interface IMovie {
+export interface IMovie {
   id: string;
   title: string;
   releasedDate: string;
@@ -44,7 +44,4 @@ interface IMovie {
   poster: url;
 }
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-expect-error
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-type TMovies = IMovie[];
+export type TMovies = IMovie[];

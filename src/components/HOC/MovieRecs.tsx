@@ -14,8 +14,9 @@ const MovieRecs: React.FC = () => {
     (async () => {
       try {
         const movies = await fetchMovies();
-        setIsLoading(false);
+        const animationDelay = setTimeout(() => setIsLoading(false), 750);
         setAvailableMovies(movies);
+        return () => clearTimeout(animationDelay);
       } catch (error) {
         throw new Error(String(error));
       }
@@ -25,19 +26,22 @@ const MovieRecs: React.FC = () => {
   const movieOptions = generateMovieOptions(availableMovies);
 
   return (
-    <main>
-      <div className="container">
+    <>
+      <main>
         {isLoading ? (
-          <span>Loading...</span>
+          <Loader />
         ) : (
-          // <Loader />
-          <>
-            <h1>{pageTitle}</h1>
-            <MovieSearch data={movieOptions} />
-          </>
+          <div className="container">
+            <div className="content">
+              <div className="title">
+                <h1>{pageTitle}</h1>
+              </div>
+              <MovieSearch data={movieOptions} />
+            </div>
+          </div>
         )}
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 

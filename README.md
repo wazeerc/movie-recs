@@ -22,6 +22,20 @@ Built with:
   npm i
   npm run dev
 ```
+
+## Setting Up Supabase
+
+1. Go to [Supabase](https://supabase.com) and create an account.
+2. Create a new project in the Supabase dashboard.
+3. Once the project is created, go to the "Settings" tab and find your `API URL` and `Anon Key`.
+4. Copy these values and create a `.env` file in the root of the cloned repository:
+5. Create a table called `Movies` and import the `csv` file from `public/data/movies.csv` and set a PK.
+6. Create a RLS policy in order to access the data.
+
+```
+VITE_SUPABASE_URL=your_supabase_url_here
+VITE_SUPABASE_ANON_KEY=your_supabase_anon_key_here
+```
     
 ## Contributing
 

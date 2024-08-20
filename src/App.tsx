@@ -1,11 +1,14 @@
-import MovieRecs from "./components/HOC/MovieRecs";
 import "./App.css";
 import "./index.css";
+import MovieRecs from "./components/HOC/MovieRecs";
+import { MoviesProvider } from "./Context";
 
 function App() {
   return (
     <>
-      <MovieRecs />
+      <MoviesProvider>
+        <MovieRecs />
+      </MoviesProvider>
     </>
   );
 }

@@ -10,17 +10,16 @@
 [![Vite](https://img.shields.io/badge/vite-000000?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
 [![Tailwind](https://img.shields.io/badge/tailwindcss-000000?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
-<br>
 [![Magic UI](https://img.shields.io/badge/magicui-000000?style=for-the-badge&logo=magicui&logoColor=white)](https://magicui.design/)
 [![React Query](https://img.shields.io/badge/React%20Query-000000?style=for-the-badge&logo=react-query&logoColor=white)](https://tanstack.com/query)
 [![Supabase](https://img.shields.io/badge/Supabase-000000?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 
-> [!Note]  
+> [!Note]
 > 🚧 Development is still in progress.
 
 ## Installation
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > Run `node -v` to check if you have Node installed.
 >
 > > Download [Node.js](https://nodejs.org/en/download/prebuilt-installer)

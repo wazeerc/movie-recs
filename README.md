@@ -65,4 +65,4 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. S
 ---
 
 ###### RLS Policy settings
-<img style="float: left;" id="ss" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings">
+<img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings">

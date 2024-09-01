@@ -3,9 +3,9 @@ import { IMovie, TMovies } from "@/models/movie";
 
 interface IMoviesContextProps {
   availableMovies: TMovies;
-  setAvailableMovies: React.Dispatch<React.SetStateAction<TMovies>>;
+  populateAvailableMovies: React.Dispatch<React.SetStateAction<TMovies>>;
   selectedMovies: IMovie[];
-  setSelectedMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
+  addSelectedMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
 }
 
 interface IMoviesProviderProps {
@@ -16,18 +16,18 @@ const MoviesContext = createContext<IMoviesContextProps | undefined>(undefined);
 
 const defaultMoviesContext: IMoviesContextProps = {
   availableMovies: [],
-  setAvailableMovies: () => [],
+  populateAvailableMovies: () => [],
   selectedMovies: [],
-  setSelectedMovies: () => [],
+  addSelectedMovies: () => [],
 };
 
 export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
   children,
 }) => {
-  const [availableMovies, setAvailableMovies] = useState<TMovies>(
+  const [availableMovies, populateAvailableMovies] = useState<TMovies>(
     defaultMoviesContext.availableMovies
   );
-  const [selectedMovies, setSelectedMovies] = useState<IMovie[]>(
+  const [selectedMovies, addSelectedMovies] = useState<IMovie[]>(
     defaultMoviesContext.selectedMovies
   );
 
@@ -35,9 +35,9 @@ export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
     <MoviesContext.Provider
       value={{
         availableMovies,
-        setAvailableMovies,
+        populateAvailableMovies,
         selectedMovies,
-        setSelectedMovies,
+        addSelectedMovies,
       }}
     >
       {children}
@@ -46,7 +46,7 @@ export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useMovies = (): IMoviesContextProps => {
+export const useMoviesContext = (): IMoviesContextProps => {
   const context = useContext(MoviesContext);
   if (!context)
     throw new Error("useMovies must be used within a MoviesProvider");

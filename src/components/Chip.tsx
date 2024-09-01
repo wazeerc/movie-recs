@@ -2,15 +2,15 @@ import ResetIcon from "./IconButton";
 import "./styles/Chip.css";
 
 interface ChipProps {
-  selectedMovies: string;
+  selectedMovie: string;
   onDelete: () => void;
 }
 
-const Chip: React.FC<ChipProps> = ({ selectedMovies, onDelete }) => {
+const Chip: React.FC<ChipProps> = ({ selectedMovie, onDelete }) => {
   return (
     <>
-      <div className="chip">
-        <span>{selectedMovies}</span>
+      <div className="chip" aria-label={selectedMovie}>
+        <span>{selectedMovie}</span>
         <ResetIcon
           state="active"
           color="#89b4fa"

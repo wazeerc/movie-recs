@@ -31,6 +31,14 @@ Built with:
 4. Copy these values and create a `.env` file in the root of the cloned repository:
 5. Create a table called `Movies` and import the `csv` file from `public/data/movies.csv` and set a PK.
 6. Create a RLS policy in order to access the data.
+7. In order to create the RLS policy, please follow these steps:
+   + Open the Table Editor
+   + Select the "Movies" table
+   + Click "Add RLS Policy"
+   + Click "Create policy" (refer to [ss]("#ss") below)
+   + Choose the "Select" template
+   + Save policy
+
 
 ```
 VITE_SUPABASE_URL=your_supabase_url_here
@@ -54,3 +62,8 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. S
 
 
 ###### Readme created with [readme.so](https://github.com/octokatherine/readme.so)
+
+---
+
+###### RLS Policy settings
+<img style="float: left;" href="ss" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125">

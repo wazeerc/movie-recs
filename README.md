@@ -3,10 +3,6 @@
 
 ### Pick 3 Movies, and Let Us Find Your Next Must-Watch!
 
-###### 🚧 Note:  Development still in progress.
-
-<br>
-
 Built with:
 
 [![React](https://img.shields.io/badge/react.js-000000?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
@@ -15,6 +11,9 @@ Built with:
 [![Magic UI](https://img.shields.io/badge/magicui-000000?style=for-the-badge&logo=magicui&logoColor=white)](https://magicui.design/)
 [![Supabase](https://img.shields.io/badge/Supabase-000000?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
 [![](https://img.shields.io/badge/firebase-000000?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
+
+> [!WARNING]  
+> 🚧 Development is still in progress.
 
 ## Installation
 

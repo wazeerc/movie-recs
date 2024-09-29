@@ -42,6 +42,7 @@ export interface IMovie {
   plot: string;
   languages: string;
   poster: url;
+  website?: url;
 }
 
 export type TMovies = IMovie[];

@@ -1,4 +1,5 @@
 import { TMovies } from "@/models/movie";
+import { defaultRecommendationsAmount } from "../utils/constants";
 
 /**
  * Generates movie recommendations based on selected movies, genres, and actors using a point-based system.
@@ -10,7 +11,7 @@ import { TMovies } from "@/models/movie";
 const genRecommendations = (
   allMovies: TMovies,
   selections: TMovies,
-  numberOfRecommendations: number = 3
+  numberOfRecommendations = defaultRecommendationsAmount
 ): TMovies => {
   const recommendations = new Map<
     string,

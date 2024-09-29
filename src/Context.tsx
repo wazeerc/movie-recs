@@ -6,6 +6,8 @@ interface IMoviesContextProps {
   populateAvailableMovies: React.Dispatch<React.SetStateAction<TMovies>>;
   selectedMovies: IMovie[];
   addSelectedMovies: React.Dispatch<React.SetStateAction<IMovie[]>>;
+  recommendations: TMovies;
+  setRecommendations: React.Dispatch<React.SetStateAction<TMovies>>;
 }
 
 interface IMoviesProviderProps {
@@ -19,6 +21,8 @@ const defaultMoviesContext: IMoviesContextProps = {
   populateAvailableMovies: () => [],
   selectedMovies: [],
   addSelectedMovies: () => [],
+  recommendations: [],
+  setRecommendations: () => [],
 };
 
 export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
@@ -30,6 +34,8 @@ export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
   const [selectedMovies, addSelectedMovies] = useState<IMovie[]>(
     defaultMoviesContext.selectedMovies
   );
+  const [generatedRecommendations, setGeneratedRecommendations] =
+    useState<TMovies>(defaultMoviesContext.recommendations);
 
   return (
     <MoviesContext.Provider
@@ -38,6 +44,8 @@ export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
         populateAvailableMovies,
         selectedMovies,
         addSelectedMovies,
+        recommendations: generatedRecommendations,
+        setRecommendations: setGeneratedRecommendations,
       }}
     >
       {children}

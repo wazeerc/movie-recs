@@ -8,7 +8,7 @@ interface IIconButtonProps {
   ref?: React.Ref<SVGSVGElement>;
   onreset: () => void;
   state?: TState;
-  size: number;
+  size?: number;
   color?: string;
   children?: React.ReactNode;
   icon: IIcon;
@@ -73,7 +73,7 @@ const IconButton = (props: IIconButtonProps) => {
   const {
     onreset: onReset,
     state = "active",
-    size = 24,
+    size = 20,
     color = "#eee",
     icon,
   } = props;

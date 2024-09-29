@@ -7,7 +7,6 @@ import React, {
   useRef,
 } from "react";
 
-import { TMovies } from "@/models/movie";
 import { useMoviesContext } from "@/Context";
 import genRecommendations from "@/utils/recommendations";
 import {
@@ -17,17 +16,23 @@ import {
 import MovieSelection from "../MovieSelection";
 import ResetIcon from "../IconButton";
 import { Loader } from "../Loader";
+import { Carousel, Cards } from "../Carousel";
 
 const MAX_SELECTIONS = 3;
 const PAGE_TITLE = "Movie Recs";
 
 const MovieRecs: React.FC = () => {
   const genRecsRef = useRef<HTMLButtonElement>(null);
-  const { availableMovies, populateAvailableMovies, selectedMovies } =
-    useMoviesContext();
+  const {
+    availableMovies,
+    populateAvailableMovies,
+    selectedMovies,
+    recommendations,
+    setRecommendations,
+  } = useMoviesContext();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [recommendations, setRecommendations] = useState<TMovies>([]);
+  const hasRecommendations: boolean = recommendations.length > 0;
 
   const areThreeMoviesSelected: boolean = useMemo(
     () => selectedMovies.length === MAX_SELECTIONS,
@@ -53,57 +58,65 @@ const MovieRecs: React.FC = () => {
   const handleRecommendationsGeneration = useCallback(() => {
     if (areThreeMoviesSelected)
       setRecommendations(genRecommendations(availableMovies, selectedMovies));
-  }, [areThreeMoviesSelected, availableMovies, selectedMovies]);
+  }, [
+    areThreeMoviesSelected,
+    availableMovies,
+    selectedMovies,
+    setRecommendations,
+  ]);
+
+  const renderMovieRecs = useCallback(() => {
+    const movies = generateMovieOptionsForSearch(availableMovies);
+
+    return (
+      <div className="container">
+        <section className="content">
+          <div className="title">
+            <h1>{PAGE_TITLE}</h1>
+          </div>
+          <MovieSelection data={movies} />
+          <section className="recommendations">
+            <button
+              className="gen-recs-btn"
+              ref={genRecsRef}
+              onClick={handleRecommendationsGeneration}
+              disabled={!areThreeMoviesSelected}
+            >
+              Get Recommendations
+            </button>
+            {hasRecommendations && (
+              <ResetIcon
+                onreset={() => setRecommendations([])}
+                icon={"reset"}
+              />
+            )}
+            <section>
+              {hasRecommendations && (
+                <Carousel>
+                  {recommendations?.map((movie) => (
+                    <Cards key={movie.title} {...movie} />
+                  ))}
+                </Carousel>
+              )}
+              <div className="clear-recs"></div>
+            </section>
+          </section>
+        </section>
+      </div>
+    );
+  }, [
+    areThreeMoviesSelected,
+    availableMovies,
+    handleRecommendationsGeneration,
+    hasRecommendations,
+    recommendations,
+    setRecommendations,
+  ]);
 
   return (
     <>
-      <main>
-        {isLoading ? (
-          <Loader />
-        ) : (
-          <div className="container">
-            <section className="content">
-              <div className="title">
-                <h1>{PAGE_TITLE}</h1>
-              </div>
-              <MovieSelection
-                data={generateMovieOptionsForSearch(availableMovies)}
-              />
-              <section className="recommendations">
-                <button
-                  className="gen-recs-btn"
-                  ref={genRecsRef}
-                  onClick={handleRecommendationsGeneration}
-                  disabled={!areThreeMoviesSelected}
-                >
-                  Get Recommendations
-                </button>
-                {recommendations.length > 0 && (
-                  <ResetIcon
-                    onreset={() => setRecommendations([])}
-                    size={16}
-                    icon={"reset"}
-                  />
-                )}
-              </section>
-              <section>
-                {recommendations.length > 0 && (
-                  <div className="recommendations">
-                    <strong>Recommendations:</strong>
-                    <div className="recs">
-                      {recommendations.map((movie) => (
-                        <div key={movie.title} className="rec">
-                          <p>{movie.title}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
-                <div className="clear-recs"></div>
-              </section>
-            </section>
-          </div>
-        )}
+      <main className="flex w-full h-full justify-center items-center">
+        {isLoading ? <Loader /> : renderMovieRecs()}
       </main>
     </>
   );

@@ -17,7 +17,8 @@ interface IMovieSelectionProps {
 
 const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
   const { data } = props;
-  const { availableMovies, addSelectedMovies } = useMoviesContext();
+  const { availableMovies, addSelectedMovies, setRecommendations } =
+    useMoviesContext();
 
   const [movieOptions, setMovieOptions] = useState<SelectSearchOption[]>([]);
   const [selectMovieOptions, setSelectedMovieOptions] = useState<string[]>([]);
@@ -103,6 +104,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
     if (selectMovieOptions.length === 0) return;
     setSelectedMovieOptions([]);
     addSelectedMovies([]);
+    setRecommendations([]);
     hideDropdown(0);
     toggleSearchBar();
   };
@@ -137,7 +139,6 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
           <ResetIcon
             onreset={resetSelections}
             state={selectMovieOptions.length > 0 ? "active" : "disabled"}
-            size={20}
             color="#eee"
             icon="reset"
           />

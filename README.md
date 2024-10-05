@@ -3,7 +3,7 @@
 
 ### Pick 3 Movies, and Let Us Find Your Next Must-Watch!
 
-Built with:
+_Built with:_
 
 [![React](https://img.shields.io/badge/react.js-000000?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/vite-000000?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -16,12 +16,19 @@ Built with:
 [![Firebase](https://img.shields.io/badge/firebase-000000?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 -->
 
-> [!WARNING]  
+> [!Note]  
 > 🚧 Development is still in progress.
 
 ## Installation
 
+> [!IMPORTANT]  
+> Run `node -v` to check if you have Node installed. 
+> > Download [Node.js](https://nodejs.org/en/download/prebuilt-installer)
+
+
 ```bash
+  git clone https://github.com/wazeerc/movie-recs
+  cd movie-recs
   npm i
   npm run dev
 ```
@@ -60,7 +67,7 @@ Contributions are always welcome! 😃
 
 ## License
 
-Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. See LICENSE for more information.
+Distributed under the [Apache License](http://www.apache.org/licenses/). See LICENSE for more information.
 
 
 ###### Readme created with [readme.so](https://github.com/octokatherine/readme.so)

@@ -12,9 +12,7 @@ _Built with:_
 [![Magic UI](https://img.shields.io/badge/magicui-000000?style=for-the-badge&logo=magicui&logoColor=white)](https://magicui.design/)
 [![React Query](https://img.shields.io/badge/React%20Query-000000?style=for-the-badge&logo=react-query&logoColor=white)](https://tanstack.com/query)
 [![Supabase](https://img.shields.io/badge/Supabase-000000?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
-<!---
 [![Firebase](https://img.shields.io/badge/firebase-000000?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
--->
 
 > [!Note]  
 > 🚧 Development is still in progress.

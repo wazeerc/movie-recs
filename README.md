@@ -1,8 +1,8 @@
+<a name="readme-top"></a>
 
 # Movie Recs 🎥
 
 ### Pick 3 Movies, and Let Us Find Your Next Must-Watch!
-
 _Built with:_
 
 [![React](https://img.shields.io/badge/react.js-000000?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
@@ -75,4 +75,6 @@ Distributed under the [Apache License](http://www.apache.org/licenses/). See LIC
 ---
 
 ###### RLS Policy settings
-<img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings">
+<img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings"><img/>
+
+<p align="right"><a href="#readme-top">🔝</a></p>

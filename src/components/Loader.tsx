@@ -5,7 +5,7 @@ export function Loader() {
   return (
     <div className="relative flex h-full w-full flex-col items-center justify-center overflow-hidden md:shadow-xl">
       <p className="z-10 whitespace-pre-wrap text-center text-4xl font-medium tracking-tighter text-white">
-        Loading
+        Loading...
       </p>
       <Ripple />
     </div>

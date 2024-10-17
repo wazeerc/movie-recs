@@ -1,24 +1,21 @@
-import "./styles/Search.css";
+import "./styles/SelectSearch.css";
 import React, { useState } from "react";
 import useEffectWithMount from "@/hooks/useEffectWithMount";
-import SelectSearch, {
-  SelectedOptionValue,
-  SelectSearchOption,
-} from "react-select-search";
+import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";
 
 import { useMoviesContext } from "@/Context";
 import { setFocus } from "@/utils/utils";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
+import CallToActionWithReset from "./CallToAction";
 
 interface IMovieSelectionProps {
   data: SelectSearchOption[];
 }
 
-const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
+const MovieSelection: React.FC<IMovieSelectionProps> = props => {
   const { data } = props;
-  const { availableMovies, addSelectedMovies, setRecommendations } =
-    useMoviesContext();
+  const { availableMovies, addSelectedMovies, setRecommendations } = useMoviesContext();
 
   const [movieOptions, setMovieOptions] = useState<SelectSearchOption[]>([]);
   const [selectMovieOptions, setSelectedMovieOptions] = useState<string[]>([]);
@@ -26,7 +23,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
   const MAX_SELECTIONS = 3;
   const areMaxMoviesSelected: boolean = React.useMemo(
     () => selectMovieOptions.length === MAX_SELECTIONS,
-    [selectMovieOptions]
+    [selectMovieOptions],
   );
 
   useEffectWithMount(() => {
@@ -34,9 +31,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
   }, []);
 
   const toggleSearchBar = (effect: string = "blur"): void => {
-    const inputElement = document.querySelector(
-      ".select-search-input"
-    ) as HTMLInputElement;
+    const inputElement = document.querySelector(".select-search-input") as HTMLInputElement;
     if (inputElement) {
       setFocus(inputElement);
       if (effect === "blur") inputElement.blur();
@@ -45,11 +40,9 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
 
   const hideDropdown = (
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _selectedMoviesLength: number = selectMovieOptions.length
+    _selectedMoviesLength: number = selectMovieOptions.length,
   ): void => {
-    const dropdownElement = document.querySelector(
-      ".select-search-select"
-    ) as HTMLDivElement;
+    const dropdownElement = document.querySelector(".select-search-select") as HTMLDivElement;
 
     if (dropdownElement) {
       dropdownElement.style.display = areMaxMoviesSelected ? "none" : "";
@@ -70,32 +63,25 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
         !selectMovieOptions.includes(targetedMovie) &&
         selectMovieOptions.length < MAX_SELECTIONS
       ) {
-        const targetedMovieObject = availableMovies.find(
-          (movie) => movie.title === targetedMovie
-        );
+        const targetedMovieObject = availableMovies.find(movie => movie.title === targetedMovie);
         if (targetedMovieObject) {
-          addSelectedMovies((prevSelectedMovies) => [
-            ...prevSelectedMovies,
-            targetedMovieObject,
-          ]);
+          addSelectedMovies(prevSelectedMovies => [...prevSelectedMovies, targetedMovieObject]);
         }
         setSelectedMovieOptions([...selectMovieOptions, targetedMovie]);
       }
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [selectMovieOptions, addSelectedMovies]
+    [selectMovieOptions, addSelectedMovies],
   );
 
   const removeMovieFromSelections = (movieToDelete: string): void => {
-    setSelectedMovieOptions((prevSelectedMovies) => {
-      const updatedMovies = prevSelectedMovies.filter(
-        (movie) => movie !== movieToDelete
-      );
+    setSelectedMovieOptions(prevSelectedMovies => {
+      const updatedMovies = prevSelectedMovies.filter(movie => movie !== movieToDelete);
       hideDropdown(updatedMovies.length);
       return updatedMovies;
     });
-    addSelectedMovies((prevSelectedMovies) =>
-      prevSelectedMovies.filter((movie) => movie.title !== movieToDelete)
+    addSelectedMovies(prevSelectedMovies =>
+      prevSelectedMovies.filter(movie => movie.title !== movieToDelete),
     );
     toggleSearchBar();
   };
@@ -111,24 +97,25 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
   //#endregion
 
   return (
-    <>
-      <div className="movies-container">
-        <section className="chips-wrapper">
-          {selectMovieOptions.map((movie, index) => (
-            <Chip
-              key={index}
-              selectedMovie={movie}
-              onDelete={() => removeMovieFromSelections(movie)}
-            />
-          ))}
-        </section>
-        <section className="search-bar-container">
+    <div className="flex w-auto flex-col justify-start gap-8 self-start">
+      <section className="flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-x-scroll rounded-lg border-2 border-dotted border-slate-600 p-3">
+        {selectMovieOptions.map((movie, index) => (
+          <Chip
+            key={index}
+            selectedMovie={movie}
+            onDelete={() => removeMovieFromSelections(movie)}
+          />
+        ))}
+      </section>
+
+      <CallToActionWithReset
+        PrimaryAction={
           <SelectSearch
             options={movieOptions.filter(
-              (movie) => !selectMovieOptions.includes(movie.value as string)
+              movie => !selectMovieOptions.includes(movie.value as string),
             )}
             value=""
-            placeholder="Search for your favorite movies"
+            placeholder="Search"
             onChange={addMovieToSelections}
             autoComplete="on"
             emptyMessage="Movie not found..."
@@ -136,15 +123,17 @@ const MovieSelection: React.FC<IMovieSelectionProps> = (props) => {
             closeOnSelect={areMaxMoviesSelected} // Auto closes dropdown when 3 movies are selected
             search
           />
+        }
+        SecondaryAction={
           <ResetIcon
             onreset={resetSelections}
             state={selectMovieOptions.length > 0 ? "active" : "disabled"}
             color="#eee"
             icon="reset"
           />
-        </section>
-      </div>
-    </>
+        }
+      />
+    </div>
   );
 };
 

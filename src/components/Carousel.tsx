@@ -4,18 +4,13 @@ import Marquee from "../@/components/magicui/marquee";
 import { IMovie } from "../models/movie";
 import { defaultRecommendationsAmount } from "@/utils/constants";
 
-export const Cards: React.FC<IMovie> = (movie) => {
+export const Cards: React.FC<IMovie> = movie => {
   return (
-    <div className="flex flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center p-2">
       <div className="flex flex-row items-center justify-center">
         <div className="flex flex-col items-center justify-center">
-          <img
-            className="w-20 h-20 rounded-lg"
-            src={movie.poster}
-            alt={movie.title}
-          />
-          <h2 className="text-lg font-medium truncate">{movie.title}</h2>
-          <p className="text-md">{movie.releasedDate}</p>
+          <img className="h-20 w-20 rounded-md" src={movie.poster} alt={movie.title} />
+          <h2 className="text-md truncate font-medium">{movie.title}</h2>
         </div>
       </div>
     </div>
@@ -32,7 +27,7 @@ export const Carousel: React.FC<CarouselProps> = ({ children }) => {
   const right = childrenArray.slice(defaultRecommendationsAmount / 2);
 
   return (
-    <div className="relative flex h-[300px] w-[350px] flex-col items-center justify-center overflow-hidden rounded-lg md:shadow-xl">
+    <div className="flex h-96 w-96 flex-col items-center justify-center gap-4 overflow-hidden rounded-lg border-2 border-dotted border-slate-600 p-2">
       <Marquee pauseOnHover className="[--duration:20s]">
         <div className="flex items-center justify-center">{left}</div>
       </Marquee>

@@ -11,27 +11,16 @@ import { defaultRecommendationsAmount } from "../utils/constants";
 const genRecommendations = (
   allMovies: TMovies,
   selections: TMovies,
-  numberOfRecommendations = defaultRecommendationsAmount
+  numberOfRecommendations = defaultRecommendationsAmount,
 ): TMovies => {
-  const recommendations = new Map<
-    string,
-    { movie: TMovies[0]; points: number }
-  >();
+  const recommendations = new Map<string, { movie: TMovies[0]; points: number }>();
 
-  const selectedMovieTitles = selections.flatMap((movie) =>
-    movie.title.toLowerCase()
-  );
-  const selectedGenres = new Set(
-    selections.flatMap((movie) => movie.genres.split(","))
-  );
-  const selectedActors = new Set(
-    selections.flatMap((movie) => movie.cast.split(","))
-  );
-  const selectedReleasedDates = new Set(
-    selections.flatMap((movie) => parseInt(movie.releasedDate))
-  );
+  const selectedMovieTitles = selections.flatMap(movie => movie.title.toLowerCase());
+  const selectedGenres = new Set(selections.flatMap(movie => movie.genres.split(",")));
+  const selectedActors = new Set(selections.flatMap(movie => movie.cast.split(",")));
+  const selectedReleasedDates = new Set(selections.flatMap(movie => parseInt(movie.releasedDate)));
 
-  allMovies.forEach((movie) => {
+  allMovies.forEach(movie => {
     if (selectedMovieTitles.includes(movie.title.toLowerCase())) return;
 
     let points = 0;
@@ -40,24 +29,21 @@ const genRecommendations = (
     const cast = new Set(movie.cast.split(","));
     const releasedDate = parseInt(movie.releasedDate);
 
-    selectedMovieTitles.forEach((selectedTitle) => {
+    selectedMovieTitles.forEach(selectedTitle => {
       if (selectedMovieTitles.includes(selectedTitle)) {
         points += 4;
       }
     });
 
-    genres.forEach((genre) => {
+    genres.forEach(genre => {
       if (selectedGenres.has(genre)) points += 2;
     });
 
-    cast.forEach((actor) => {
+    cast.forEach(actor => {
       if (selectedActors.has(actor)) points += 3;
     });
 
-    if (
-      selectedReleasedDates.has(releasedDate - 3) ||
-      selectedReleasedDates.has(releasedDate + 3)
-    )
+    if (selectedReleasedDates.has(releasedDate - 3) || selectedReleasedDates.has(releasedDate + 3))
       points += 1;
 
     recommendations.set(movie.title, { movie, points });
@@ -66,7 +52,7 @@ const genRecommendations = (
   const filteredRecommendations = Array.from(recommendations.values())
     .sort((a, b) => b.points - a.points)
     .slice(0, numberOfRecommendations)
-    .map((rec) => rec.movie);
+    .map(rec => rec.movie);
 
   return filteredRecommendations;
 };

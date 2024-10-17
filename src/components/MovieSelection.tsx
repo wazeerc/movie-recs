@@ -97,13 +97,14 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
   //#endregion
 
   return (
-    <div className="flex w-auto flex-col justify-start gap-8 self-start">
-      <section className="flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-x-scroll rounded-lg border-2 border-dotted border-slate-600 p-3">
-        {selectMovieOptions.map((movie, index) => (
+    <div className="flex w-auto flex-col justify-start self-start">
+      <h2 className="mb-2 text-base font-semibold text-slate-400">Select 3 movies</h2>
+      <section className="mb-8 flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-x-scroll rounded-lg border-2 border-dotted border-slate-600 p-3">
+        {selectMovieOptions.map((movieTitle, index) => (
           <Chip
             key={index}
-            selectedMovie={movie}
-            onDelete={() => removeMovieFromSelections(movie)}
+            selectedMovieTitle={movieTitle}
+            onDelete={() => removeMovieFromSelections(movieTitle)}
           />
         ))}
       </section>
@@ -126,7 +127,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
         }
         SecondaryAction={
           <ResetIcon
-            onreset={resetSelections}
+            onReset={resetSelections}
             state={selectMovieOptions.length > 0 ? "active" : "disabled"}
             color="#eee"
             icon="reset"

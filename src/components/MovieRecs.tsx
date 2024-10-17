@@ -62,7 +62,7 @@ const MovieRecs: React.FC = () => {
         <main className="grid flex-grow grid-cols-1 gap-16 p-4 md:grid-cols-2">
           <section className="">
             <MovieSelection data={movies} />
-            <div className="mt-20">
+            <div className="mt-14">
               <CallToActionWithReset
                 PrimaryAction={
                   <button

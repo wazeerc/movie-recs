@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useCallback, useRef } from "react";
+import React, { useMemo, useCallback, useRef } from "react";
 
 import { useMoviesContext } from "@/Context";
 import genRecommendations from "@/utils/recommendations";
@@ -24,6 +24,15 @@ const MovieRecs: React.FC = () => {
     setRecommendations,
   } = useMoviesContext();
 
+  const { data, isSuccess, isError, isLoading } = useQuery({
+    queryKey: ["movies"],
+    queryFn: fetchMovies,
+  });
+
+  if (isSuccess && data) {
+    populateAvailableMovies(data);
+  }
+
   const movies: SelectSearchOption[] = useMemo(
     () => generateMovieOptionsForSearch(availableMovies),
     [availableMovies],
@@ -35,21 +44,6 @@ const MovieRecs: React.FC = () => {
     () => selectedMovies.length === MAX_SELECTIONS,
     [selectedMovies],
   );
-
-  const { data, isSuccess, isError, isLoading } = useQuery({
-    queryKey: ["movies"],
-    queryFn: fetchMovies,
-  });
-
-  useEffect(() => {
-    if (isSuccess) {
-      populateAvailableMovies(data);
-    }
-  }, [data, isSuccess, populateAvailableMovies]);
-
-  useEffect(() => {
-    if (areThreeMoviesSelected) genRecsRef.current?.focus();
-  }, [areThreeMoviesSelected]);
 
   const handleRecommendationsGeneration = useCallback(() => {
     if (areThreeMoviesSelected)

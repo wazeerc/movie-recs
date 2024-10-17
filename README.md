@@ -1,23 +1,33 @@
+<a name="readme-top"></a>
 
 # Movie Recs 🎥
 
 ### Pick 3 Movies, and Let Us Find Your Next Must-Watch!
 
-Built with:
-
+##### Built with:
 [![React](https://img.shields.io/badge/react.js-000000?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/vite-000000?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
+[![Tailwind](https://img.shields.io/badge/tailwindcss-000000?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
+<br>
 [![Magic UI](https://img.shields.io/badge/magicui-000000?style=for-the-badge&logo=magicui&logoColor=white)](https://magicui.design/)
+[![React Query](https://img.shields.io/badge/React%20Query-000000?style=for-the-badge&logo=react-query&logoColor=white)](https://tanstack.com/query)
 [![Supabase](https://img.shields.io/badge/Supabase-000000?style=for-the-badge&logo=supabase&logoColor=white)](https://supabase.com/)
-[![](https://img.shields.io/badge/firebase-000000?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
+[![Firebase](https://img.shields.io/badge/firebase-000000?style=for-the-badge&logo=firebase&logoColor=white)](https://firebase.google.com/)
 
-> [!WARNING]  
+> [!Note]  
 > 🚧 Development is still in progress.
 
 ## Installation
 
+> [!IMPORTANT]  
+> Run `node -v` to check if you have Node installed. 
+> > Download [Node.js](https://nodejs.org/en/download/prebuilt-installer)
+
+
 ```bash
+  git clone https://github.com/wazeerc/movie-recs
+  cd movie-recs
   npm i
   npm run dev
 ```
@@ -56,7 +66,7 @@ Contributions are always welcome! 😃
 
 ## License
 
-Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. See LICENSE for more information.
+Distributed under the [Apache License](http://www.apache.org/licenses/). See LICENSE for more information.
 
 
 ###### Readme created with [readme.so](https://github.com/octokatherine/readme.so)
@@ -64,4 +74,6 @@ Distributed under the [MIT](https://choosealicense.com/licenses/mit/) License. S
 ---
 
 ###### RLS Policy settings
-<img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings">
+<img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings"><img/>
+
+<p align="right"><a href="#readme-top">🔝</a></p>

@@ -25,17 +25,16 @@ const defaultMoviesContext: IMoviesContextProps = {
   setRecommendations: () => [],
 };
 
-export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
-  children,
-}) => {
+export const MoviesProvider: React.FC<IMoviesProviderProps> = ({ children }) => {
   const [availableMovies, populateAvailableMovies] = useState<TMovies>(
-    defaultMoviesContext.availableMovies
+    defaultMoviesContext.availableMovies,
   );
   const [selectedMovies, addSelectedMovies] = useState<IMovie[]>(
-    defaultMoviesContext.selectedMovies
+    defaultMoviesContext.selectedMovies,
   );
-  const [generatedRecommendations, setGeneratedRecommendations] =
-    useState<TMovies>(defaultMoviesContext.recommendations);
+  const [generatedRecommendations, setGeneratedRecommendations] = useState<TMovies>(
+    defaultMoviesContext.recommendations,
+  );
 
   return (
     <MoviesContext.Provider
@@ -56,7 +55,6 @@ export const MoviesProvider: React.FC<IMoviesProviderProps> = ({
 // eslint-disable-next-line react-refresh/only-export-components
 export const useMoviesContext = (): IMoviesContextProps => {
   const context = useContext(MoviesContext);
-  if (!context)
-    throw new Error("useMovies must be used within a MoviesProvider");
+  if (!context) throw new Error("useMovies must be used within a MoviesProvider");
   return context;
 };

@@ -24,7 +24,7 @@ export const fetchMovies = async (): Promise<TMovies> => {
  * @returns An array of SelectSearchOption objects.
  */
 export const genOptions = (dbData: TMovies): SelectSearchOption[] => {
-  return dbData.map((movie) => ({
+  return dbData.map(movie => ({
     name: movie.title,
     value: movie.title,
   }));
@@ -36,7 +36,7 @@ export const genOptions = (dbData: TMovies): SelectSearchOption[] => {
  * @returns An array of movie objects.
  */
 const formatDbData = (data: IMovieRawData[]): TMovies => {
-  return data.map((rawData) => {
+  return data.map(rawData => {
     const movie: IMovie = {
       id: rawData.imdbID,
       title: rawData.Title,

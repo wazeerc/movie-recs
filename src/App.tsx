@@ -1,15 +1,13 @@
 import "./App.css";
 import "./index.css";
-import MovieRecs from "./components/HOC/MovieRecs";
+import MovieRecs from "./components/MovieRecs";
 import { MoviesProvider } from "./Context";
 
 function App() {
   return (
-    <>
-      <MoviesProvider>
-        <MovieRecs />
-      </MoviesProvider>
-    </>
+    <MoviesProvider>
+      <MovieRecs />
+    </MoviesProvider>
   );
 }
 

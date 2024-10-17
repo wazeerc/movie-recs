@@ -9,7 +9,7 @@ import React from "react";
  */
 export default function useEffectWithMount(
   callback: () => void,
-  dependencies: unknown[] = []
+  dependencies: unknown[] = [],
 ): void {
   const isMounted = React.useRef(false);
 

@@ -38,7 +38,7 @@
 2. Create a new project in the Supabase dashboard.
 3. Once the project is created, go to the "Settings" tab and find your `API URL` and `Anon Key`.
 4. Copy these values and create a `.env` file in the root of the cloned repository:
-5. Create a table called `Movies` and import the `csv` file from `public/data/movies.csv` and set a PK.
+5. Create a table called `Movies` and import the `csv` file from [public/data/movies.csv](https://github.com/wazeerc/movie-recs/blob/main/public/data/movies.csv) and set a PK.
 6. Create a RLS policy in order to access the data - please follow these steps:
    - Open the Table Editor
    - Select the "Movies" table

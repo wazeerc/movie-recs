@@ -12,6 +12,7 @@ interface IIconButtonProps {
   color?: string;
   children?: React.ReactNode;
   icon: IIcon;
+  className?: string;
 }
 
 const ResetSVG = (color: string, size: number, state: TState) => {
@@ -70,13 +71,7 @@ const ClearSVG = (color: string, size: number) => {
 };
 
 const IconButton = (props: IIconButtonProps) => {
-  const {
-    onreset: onReset,
-    state = "active",
-    size = 20,
-    color = "#eee",
-    icon,
-  } = props;
+  const { onreset: onReset, state = "active", size = 20, color = "#eee", icon } = props;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (state === "disabled") {

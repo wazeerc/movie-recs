@@ -10,9 +10,9 @@ import CallToActionWithReset from "./CallToAction";
 import { SelectSearchOption } from "react-select-search";
 import { useQuery } from "@tanstack/react-query";
 import Error from "./Error";
+import { lbl } from "@/utils/constants";
 
 const MAX_SELECTIONS = 3;
-const PAGE_TITLE = "Movie Recs";
 
 const MovieRecs: React.FC = () => {
   const genRecsRef = useRef<HTMLButtonElement>(null);
@@ -38,8 +38,6 @@ const MovieRecs: React.FC = () => {
     [availableMovies],
   );
 
-  const hasRecommendations: boolean = recommendations.length > 0;
-
   const areThreeMoviesSelected: boolean = useMemo(
     () => selectedMovies.length === MAX_SELECTIONS,
     [selectedMovies],
@@ -56,7 +54,8 @@ const MovieRecs: React.FC = () => {
     return (
       <div className="flex h-screen flex-col">
         <header className="mb-20 mt-16">
-          <h1 className="text-center text-4xl font-semibold">{PAGE_TITLE}</h1>
+          <h1 className="text-center text-4xl font-semibold">{lbl.title}</h1>
+          <h2 className="pt-2 text-center text-lg text-gray-400">{lbl.description}</h2>
         </header>
 
         <main className="grid flex-grow grid-cols-1 gap-16 p-4 md:grid-cols-2">
@@ -70,8 +69,9 @@ const MovieRecs: React.FC = () => {
                     ref={genRecsRef}
                     onClick={handleRecommendationsGeneration}
                     disabled={!areThreeMoviesSelected}
+                    aria-label={lbl.getRecommendations}
                   >
-                    Get Recommendations
+                    {lbl.getRecommendations}
                   </button>
                 }
               />
@@ -79,11 +79,9 @@ const MovieRecs: React.FC = () => {
           </section>
 
           <section className="flex min-h-96 min-w-96 justify-center">
-            {hasRecommendations && (
-              <Carousel>
-                {recommendations?.map(movie => <Cards key={movie.title} {...movie} />)}
-              </Carousel>
-            )}
+            <Carousel>
+              {recommendations?.map(movie => <Cards key={movie.title} {...movie} />)}
+            </Carousel>
           </section>
         </main>
 

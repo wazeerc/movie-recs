@@ -8,6 +8,7 @@ import { setFocus } from "@/utils/utils";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
 import CallToActionWithReset from "./CallToAction";
+import { lbl } from "@/utils/constants";
 
 interface IMovieSelectionProps {
   data: SelectSearchOption[];
@@ -98,15 +99,23 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
 
   return (
     <div className="flex w-auto flex-col justify-start self-start">
-      <h2 className="mb-2 text-base font-semibold text-slate-400">Select 3 movies</h2>
+      <h3 className="mb-2 text-base font-semibold text-slate-400">Select 3 movies</h3>
       <section className="mb-8 flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-x-scroll rounded-lg border-2 border-dotted border-slate-600 p-3">
-        {selectMovieOptions.map((movieTitle, index) => (
-          <Chip
-            key={index}
-            selectedMovieTitle={movieTitle}
-            onDelete={() => removeMovieFromSelections(movieTitle)}
-          />
-        ))}
+        {!selectMovieOptions.length ? (
+          <p className="mt-16 text-center text-sm text-gray-600" aria-label={lbl.noMovies}>
+            {lbl.noMovies}
+          </p>
+        ) : (
+          <>
+            {selectMovieOptions.map((movieTitle, index) => (
+              <Chip
+                key={index}
+                selectedMovieTitle={movieTitle}
+                onDelete={() => removeMovieFromSelections(movieTitle)}
+              />
+            ))}
+          </>
+        )}
       </section>
 
       <CallToActionWithReset
@@ -116,10 +125,10 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
               movie => !selectMovieOptions.includes(movie.value as string),
             )}
             value=""
-            placeholder="Search"
+            placeholder={lbl.search}
             onChange={addMovieToSelections}
             autoComplete="on"
-            emptyMessage="Movie not found..."
+            emptyMessage={lbl.movieNotFound}
             disabled={isSearchDisabled()}
             closeOnSelect={areMaxMoviesSelected} // Auto closes dropdown when 3 movies are selected
             search

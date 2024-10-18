@@ -25,7 +25,7 @@ const CallToActionWithReset: React.FC<TCallToActionWithResetProps> = ({
   return (
     <div className="flex items-center gap-4">
       {PrimaryAction ?? AlternatePrimaryAction}
-      {SecondaryAction}
+      {SecondaryAction && SecondaryAction}
     </div>
   );
 };

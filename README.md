@@ -5,6 +5,7 @@
 ### Pick 3 Movies, and Let Us Find Your Next Must-Watch!
 
 ##### Built with:
+
 [![React](https://img.shields.io/badge/react.js-000000?style=for-the-badge&logo=react&logoColor=white)](https://react.dev/)
 [![Vite](https://img.shields.io/badge/vite-000000?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-000000?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org/)
@@ -21,9 +22,9 @@
 ## Installation
 
 > [!IMPORTANT]  
-> Run `node -v` to check if you have Node installed. 
+> Run `node -v` to check if you have Node installed.
+>
 > > Download [Node.js](https://nodejs.org/en/download/prebuilt-installer)
-
 
 ```bash
   git clone https://github.com/wazeerc/movie-recs
@@ -66,12 +67,12 @@ Contributions are always welcome! 😃
 
 Distributed under the [Apache License](http://www.apache.org/licenses/). See LICENSE for more information.
 
-
 ###### Readme created with [readme.so](https://github.com/octokatherine/readme.so)
 
 ---
 
 ###### RLS Policy settings
+
 <img style="float: left;" id="ss" width="500px" src="https://github.com/user-attachments/assets/2aac28e9-b791-430d-92f4-4ff05800c125" alt="RLS Policy Settings"><img/>
 
 <p align="right"><a href="#readme-top">🔝</a></p>

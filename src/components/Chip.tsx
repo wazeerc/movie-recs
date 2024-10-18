@@ -2,17 +2,17 @@ import ResetIcon from "./IconButton";
 import "./styles/Chip.css";
 
 interface ChipProps {
-  selectedMovie: string;
+  selectedMovieTitle: string;
   onDelete: () => void;
 }
 
-const Chip: React.FC<ChipProps> = ({ selectedMovie, onDelete }) => {
+const Chip: React.FC<ChipProps> = ({ selectedMovieTitle, onDelete }) => {
   return (
-    <div className="chip" aria-label={selectedMovie}>
+    <div className="chip" aria-label={selectedMovieTitle}>
       <span className="max-w-48 overflow-hidden text-ellipsis whitespace-nowrap text-sm">
-        {selectedMovie}
+        {selectedMovieTitle}
       </span>
-      <ResetIcon state="active" color="#89b4fa" size={20} onreset={() => onDelete()} icon="clear" />
+      <ResetIcon state="active" color="#89b4fa" size={20} onReset={() => onDelete()} icon="clear" />
     </div>
   );
 };

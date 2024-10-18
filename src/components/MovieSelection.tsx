@@ -1,5 +1,4 @@
 import "./styles/SelectSearch.css";
-import "./styles/SelectSearch.css";
 import React, { useState } from "react";
 import useEffectWithMount from "@/hooks/useEffectWithMount";
 import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";

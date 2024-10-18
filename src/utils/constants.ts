@@ -1,4 +1,5 @@
 export const defaultRecommendationsAmount: number = 10 as const;
+export const maxSelectionsAmount: number = 3 as const;
 
 type TLabel = {
   [key: string]: string;

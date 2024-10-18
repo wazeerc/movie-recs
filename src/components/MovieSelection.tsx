@@ -5,10 +5,10 @@ import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-sel
 
 import { useMoviesContext } from "@/Context";
 import { setFocus } from "@/utils/utils";
+import { maxSelectionsAmount, lbl } from "@/utils/constants";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
 import CallToActionWithReset from "./CallToAction";
-import { lbl } from "@/utils/constants";
 
 interface IMovieSelectionProps {
   data: SelectSearchOption[];
@@ -21,9 +21,8 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
   const [movieOptions, setMovieOptions] = useState<SelectSearchOption[]>([]);
   const [selectMovieOptions, setSelectedMovieOptions] = useState<string[]>([]);
 
-  const MAX_SELECTIONS = 3;
   const areMaxMoviesSelected: boolean = React.useMemo(
-    () => selectMovieOptions.length === MAX_SELECTIONS,
+    () => selectMovieOptions.length === maxSelectionsAmount,
     [selectMovieOptions],
   );
 
@@ -62,7 +61,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
       const targetedMovie = selectedOption as string;
       if (
         !selectMovieOptions.includes(targetedMovie) &&
-        selectMovieOptions.length < MAX_SELECTIONS
+        selectMovieOptions.length < maxSelectionsAmount
       ) {
         const targetedMovieObject = availableMovies.find(movie => movie.title === targetedMovie);
         if (targetedMovieObject) {
@@ -100,7 +99,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
   return (
     <div className="flex w-auto flex-col justify-start self-start">
       <h3 className="mb-2 text-base font-semibold text-slate-400">Select 3 movies</h3>
-      <section className="mb-8 flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-x-scroll rounded-lg border-2 border-dotted border-slate-600 p-3">
+      <section className="mb-8 flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-hidden rounded-lg border-2 border-dotted border-slate-600 p-3">
         {!selectMovieOptions.length ? (
           <p className="mt-16 text-center text-sm text-gray-600" aria-label={lbl.noMovies}>
             {lbl.noMovies}

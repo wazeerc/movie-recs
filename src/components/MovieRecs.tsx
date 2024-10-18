@@ -2,6 +2,7 @@ import React, { useMemo, useCallback, useRef } from "react";
 
 import { useMoviesContext } from "@/Context";
 import genRecommendations from "@/utils/recommendations";
+import { maxSelectionsAmount, lbl } from "@/utils/constants";
 import { genOptions as generateMovieOptionsForSearch, fetchMovies } from "@/utils/dataFetching";
 import MovieSelection from "./MovieSelection";
 import { Loader } from "./Loader";
@@ -10,9 +11,6 @@ import CallToActionWithReset from "./CallToAction";
 import { SelectSearchOption } from "react-select-search";
 import { useQuery } from "@tanstack/react-query";
 import Error from "./Error";
-import { lbl } from "@/utils/constants";
-
-const MAX_SELECTIONS = 3;
 
 const MovieRecs: React.FC = () => {
   const genRecsRef = useRef<HTMLButtonElement>(null);
@@ -39,7 +37,7 @@ const MovieRecs: React.FC = () => {
   );
 
   const areThreeMoviesSelected: boolean = useMemo(
-    () => selectedMovies.length === MAX_SELECTIONS,
+    () => selectedMovies.length === maxSelectionsAmount,
     [selectedMovies],
   );
 

@@ -71,7 +71,7 @@ const ClearSVG = (color: string, size: number) => {
 };
 
 const IconButton = (props: IIconButtonProps) => {
-  const { onReset, state = "active", size = 20, color = "#eee", icon } = props;
+  const { onreset: onReset, state = "active", size = 20, color = "#eee", icon } = props;
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (state === "disabled") {

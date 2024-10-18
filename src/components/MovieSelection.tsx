@@ -3,7 +3,6 @@ import "./styles/SelectSearch.css";
 import React, { useState } from "react";
 import useEffectWithMount from "@/hooks/useEffectWithMount";
 import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";
-import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";
 
 import { useMoviesContext } from "@/Context";
 import { setFocus } from "@/utils/utils";

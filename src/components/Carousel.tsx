@@ -10,7 +10,9 @@ export const Cards: React.FC<IMovie> = movie => {
       <div className="flex flex-row items-center justify-center">
         <div className="flex flex-col items-center justify-center">
           <img className="h-20 w-20 rounded-lg" src={movie.poster} alt={movie.title} />
-          <h2 className="truncate text-base font-medium">{movie.title}</h2>
+          <h2 className="mt-2 w-24 truncate text-center text-base font-medium" title={movie.title}>
+            {movie.title}
+          </h2>
         </div>
       </div>
     </div>

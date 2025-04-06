@@ -1,19 +1,17 @@
-import React, { useMemo, useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import { useMoviesContext } from "@/Context";
+import { lbl, maxSelectionsAmount } from "@/utils/constants";
+import { fetchMovies, genOptions as generateMovieOptionsForSearch } from "@/utils/dataFetching";
 import genRecommendations from "@/utils/recommendations";
-import { maxSelectionsAmount, lbl } from "@/utils/constants";
-import { genOptions as generateMovieOptionsForSearch, fetchMovies } from "@/utils/dataFetching";
-import MovieSelection from "./MovieSelection";
-import { Loader } from "./Loader";
-import { Carousel, Cards } from "./Carousel";
-import CallToActionWithReset from "./CallToAction";
-import { SelectSearchOption } from "react-select-search";
 import { useQuery } from "@tanstack/react-query";
+import { SelectSearchOption } from "react-select-search";
+import { Cards, Carousel } from "./Carousel";
 import Error from "./Error";
+import { Loader } from "./Loader";
+import MovieSelection from "./MovieSelection";
 
 const MovieRecs: React.FC = () => {
-  const genRecsRef = useRef<HTMLButtonElement>(null);
   const {
     availableMovies,
     populateAvailableMovies,
@@ -27,9 +25,11 @@ const MovieRecs: React.FC = () => {
     queryFn: fetchMovies,
   });
 
-  if (isSuccess && data) {
-    populateAvailableMovies(data);
-  }
+  useEffect(() => {
+    if (isSuccess && data) {
+      populateAvailableMovies(data);
+    }
+  }, [isSuccess, data, populateAvailableMovies]);
 
   const movies: SelectSearchOption[] = useMemo(
     () => generateMovieOptionsForSearch(availableMovies),
@@ -46,44 +46,37 @@ const MovieRecs: React.FC = () => {
       setRecommendations(genRecommendations(availableMovies, selectedMovies));
   }, [areThreeMoviesSelected, availableMovies, selectedMovies, setRecommendations]);
 
+  useEffect(() => {
+    if (areThreeMoviesSelected) handleRecommendationsGeneration();
+  }, [areThreeMoviesSelected, handleRecommendationsGeneration]);
+
   const renderMovieRecsBody = () => {
     if (isError || !movies.length) return <Error />;
 
     return (
-      <div className="flex h-screen flex-col">
-        <header className="mb-20 mt-16">
-          <h1 className="text-center text-4xl font-semibold">{lbl.title}</h1>
-          <h2 className="pt-2 text-center text-lg text-gray-400">{lbl.description}</h2>
-        </header>
+      <div className="flex h-screen w-full flex-col items-center justify-between">
+        <div className="mt-6 flex w-full max-w-3xl flex-1 flex-col items-center justify-center">
+          <header className="w-full py-6">
+            <h1 className="text-center text-4xl font-semibold">{lbl.title}</h1>
+            <h2 className="pt-2 text-center text-lg text-gray-400">{lbl.description}</h2>
+          </header>
 
-        <main className="grid flex-grow grid-cols-1 gap-16 p-4 md:grid-cols-2">
-          <section className="">
-            <MovieSelection data={movies} />
-            <div className="mt-14">
-              <CallToActionWithReset
-                PrimaryAction={
-                  <button
-                    className={`box-border flex h-[48px] w-[300px] cursor-pointer items-center justify-center rounded-2xl border-2 border-[#333] bg-[#f5f5f5] text-[1.02rem] font-medium text-[#333] hover:border-[#f5f5f5] hover:bg-[#333] hover:text-[#f5f5f5] disabled:cursor-not-allowed disabled:bg-[#333] disabled:text-[#f5f5f5] disabled:opacity-50 hover:disabled:border-transparent`}
-                    ref={genRecsRef}
-                    onClick={handleRecommendationsGeneration}
-                    disabled={!areThreeMoviesSelected}
-                    aria-label={lbl.getRecommendations}
-                  >
-                    {lbl.getRecommendations}
-                  </button>
-                }
-              />
+          <main className="my-auto flex w-full flex-col items-center">
+            <div className="flex w-full max-w-xl flex-col gap-8">
+              <section className="w-full">
+                <MovieSelection data={movies} />
+              </section>
+
+              <section className="w-full">
+                <Carousel>
+                  {recommendations?.map(movie => <Cards key={movie.title} {...movie} />)}
+                </Carousel>
+              </section>
             </div>
-          </section>
+          </main>
+        </div>
 
-          <section className="flex min-h-96 min-w-96 justify-center">
-            <Carousel>
-              {recommendations?.map(movie => <Cards key={movie.title} {...movie} />)}
-            </Carousel>
-          </section>
-        </main>
-
-        <footer className="mb-4">
+        <footer className="mt-auto w-full py-4">
           <p className="text-center text-sm text-gray-600">
             &copy; {new Date().getFullYear()} Movie Recs. Contribute&nbsp;
             <a

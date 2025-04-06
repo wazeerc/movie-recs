@@ -35,8 +35,14 @@
 
 1. Go to [Supabase](https://supabase.com) and create an account.
 2. Create a new project in the Supabase dashboard.
-3. Once the project is created, go to the "Settings" tab and find your `API URL` and `Anon Key`.
-4. Copy these values and create a `.env` file in the root of the cloned repository:
+3. Once the project is created, go to the "Settings" and "Data API" tab and find your Project API Keys: `API URL` & `Anon Key`.
+4. Copy these values and create a `.env` file in the root of the cloned repository using the `.env.example` file as a template:
+
+```bash
+# Copy the example environment file and fill in your Supabase credentials
+cp .env.example .env
+```
+
 5. Create a table called `Movies` and import the `csv` file from [public/data/movies.csv](https://github.com/wazeerc/movie-recs/blob/main/public/data/movies.csv) and set a PK.
 6. Create a RLS policy in order to access the data - please follow these steps:
    - Open the Table Editor
@@ -45,6 +51,8 @@
    - Click "Create policy" (refer to [ss](#ss) below)
    - Choose the "Select" template
    - Save policy
+
+Your `.env` file should look like this (with your actual values):
 
 ```
 VITE_SUPABASE_URL=your_supabase_url_here

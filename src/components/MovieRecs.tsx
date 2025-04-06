@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useMemo, useRef } from "react";
+import React, { useCallback, useEffect, useMemo } from "react";
 
 import { useMoviesContext } from "@/Context";
 import genRecommendations from "@/utils/recommendations";
@@ -7,13 +7,11 @@ import { genOptions as generateMovieOptionsForSearch, fetchMovies } from "@/util
 import MovieSelection from "./MovieSelection";
 import { Loader } from "./Loader";
 import { Carousel, Cards } from "./Carousel";
-import CallToActionWithReset from "./CallToAction";
 import { SelectSearchOption } from "react-select-search";
 import { useQuery } from "@tanstack/react-query";
 import Error from "./Error";
 
 const MovieRecs: React.FC = () => {
-  const genRecsRef = useRef<HTMLButtonElement>(null);
   const {
     availableMovies,
     populateAvailableMovies,
@@ -48,6 +46,10 @@ const MovieRecs: React.FC = () => {
       setRecommendations(genRecommendations(availableMovies, selectedMovies));
   }, [areThreeMoviesSelected, availableMovies, selectedMovies, setRecommendations]);
 
+  useEffect(() => {
+    if (areThreeMoviesSelected) handleRecommendationsGeneration();
+  }, [areThreeMoviesSelected, handleRecommendationsGeneration]);
+
   const renderMovieRecsBody = () => {
     if (isError || !movies.length) return <Error />;
 
@@ -61,21 +63,6 @@ const MovieRecs: React.FC = () => {
         <main className="grid flex-grow grid-cols-1 gap-16 p-4 md:grid-cols-2">
           <section className="">
             <MovieSelection data={movies} />
-            <div className="mt-14">
-              <CallToActionWithReset
-                PrimaryAction={
-                  <button
-                    className={`box-border flex h-[48px] w-[300px] cursor-pointer items-center justify-center rounded-2xl border-2 border-[#333] bg-[#f5f5f5] text-[1.02rem] font-medium text-[#333] hover:border-[#f5f5f5] hover:bg-[#333] hover:text-[#f5f5f5] disabled:cursor-not-allowed disabled:bg-[#333] disabled:text-[#f5f5f5] disabled:opacity-50 hover:disabled:border-transparent`}
-                    ref={genRecsRef}
-                    onClick={handleRecommendationsGeneration}
-                    disabled={!areThreeMoviesSelected}
-                    aria-label={lbl.getRecommendations}
-                  >
-                    {lbl.getRecommendations}
-                  </button>
-                }
-              />
-            </div>
           </section>
 
           <section className="flex min-h-96 min-w-96 justify-center">

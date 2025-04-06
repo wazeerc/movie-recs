@@ -1,14 +1,14 @@
-import "./styles/SelectSearch.css";
-import React, { useEffect, useState } from "react";
 import useEffectWithMount from "@/hooks/useEffectWithMount";
+import React, { useEffect, useState } from "react";
 import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";
+import "./styles/SelectSearch.css";
 
 import { useMoviesContext } from "@/Context";
+import { lbl, maxSelectionsAmount } from "@/utils/constants";
 import { setFocus } from "@/utils/utils";
-import { maxSelectionsAmount, lbl } from "@/utils/constants";
+import CallToActionWithReset from "./CallToAction";
 import Chip from "./Chip";
 import ResetIcon from "./IconButton";
-import CallToActionWithReset from "./CallToAction";
 
 interface IMovieSelectionProps {
   data: SelectSearchOption[];
@@ -79,29 +79,26 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
       const updatedMovies = prevSelectedMovies.filter(movie => movie !== movieToDelete);
       return updatedMovies;
     });
-    addSelectedMovies(prevSelectedMovies =>
-      prevSelectedMovies.filter(movie => movie.title !== movieToDelete),
-    );
-    toggleSearchBar();
+
+    addSelectedMovies(prevMovieObjects => {
+      const updatedMovieObjects = prevMovieObjects.filter(
+        movieObj => movieObj.title !== movieToDelete,
+      );
+      return updatedMovieObjects;
+    });
   };
 
   const resetSelections = (): void => {
-    if (selectMovieOptions.length === 0) return;
     setSelectedMovieOptions([]);
     addSelectedMovies([]);
     setRecommendations([]);
-    toggleSearchBar();
   };
-  //#endregion
 
   return (
-    <div className="flex w-auto flex-col justify-start self-start">
-      <h3 className="mb-2 text-base font-semibold text-slate-400">Select 3 movies</h3>
-      <section className="mb-8 flex max-h-40 min-h-40 min-w-72 max-w-72 flex-col gap-2 self-start overflow-hidden rounded-lg border-2 border-dotted border-slate-600 p-3">
-        {!selectMovieOptions.length ? (
-          <p className="mt-16 text-center text-sm text-gray-600" aria-label={lbl.noMovies}>
-            {lbl.noMovies}
-          </p>
+    <div className="flex w-full flex-col space-y-6">
+      <section className="flex max-h-28 min-h-28 flex-wrap items-start gap-2 overflow-y-auto rounded-lg border-2 border-dotted border-slate-600 p-3">
+        {selectMovieOptions.length === 0 ? (
+          <p className="text-sm text-gray-500">{lbl.noMovies}</p>
         ) : (
           <>
             {selectMovieOptions.map((movieTitle, index) => (
@@ -117,19 +114,21 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
 
       <CallToActionWithReset
         PrimaryAction={
-          <SelectSearch
-            options={movieOptions.filter(
-              movie => !selectMovieOptions.includes(movie.value as string),
-            )}
-            value=""
-            placeholder={lbl.search}
-            onChange={addMovieToSelections}
-            autoComplete="on"
-            emptyMessage={lbl.movieNotFound}
-            disabled={isSearchDisabled()}
-            closeOnSelect={areMaxMoviesSelected} // Auto closes dropdown when 3 movies are selected
-            search
-          />
+          <div className="w-full">
+            <SelectSearch
+              options={movieOptions.filter(
+                movie => !selectMovieOptions.includes(movie.value as string),
+              )}
+              value=""
+              placeholder={lbl.search}
+              onChange={addMovieToSelections}
+              autoComplete="on"
+              emptyMessage={lbl.movieNotFound}
+              disabled={isSearchDisabled()}
+              closeOnSelect={areMaxMoviesSelected}
+              search
+            />
+          </div>
         }
         SecondaryAction={
           <ResetIcon

@@ -9,8 +9,7 @@
   --select-search-inverted-text: var(--select-search-background);
   --select-search-highlight: #eff1f5;
   --select-search-font: "Inter", sans-serif;
-
-  width: 240px;
+  width: 100%;
   position: relative;
   font-family: var(--select-search-font);
   color: var(--select-search-text);
@@ -197,7 +196,7 @@ body.is-light-mode .select-search-container {
   font-size: 12px;
   text-transform: uppercase;
   background: var(--select-search-border);
-  color: var(--select-search-subtle-text);
+  color: var (--select-search-subtle-text);
   letter-spacing: 0.1rem;
   padding: 10px 16px;
 }
@@ -208,4 +207,22 @@ body.is-light-mode .select-search-container {
 
 .select-search-row:not(:last-child) .select-search-group-header {
   margin-bottom: 10px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 640px) {
+  .select-search-input {
+    font-size: 14px;
+    height: 42px;
+    line-height: 42px;
+  }
+
+  .select-search-option {
+    padding: 8px 12px !important;
+    font-size: 14px !important;
+  }
+
+  .select-search-select {
+    max-height: 30vh;
+  }
 }

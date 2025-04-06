@@ -1,4 +1,4 @@
-export const defaultRecommendationsAmount: number = 10 as const;
+export const defaultRecommendationsAmount: number = 20 as const;
 export const maxSelectionsAmount: number = 3 as const;
 
 type TLabel = {

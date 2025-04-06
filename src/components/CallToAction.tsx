@@ -23,9 +23,9 @@ const CallToActionWithReset: React.FC<TCallToActionWithResetProps> = ({
     throw new Error("Only one PrimaryAction can be used at a time.");
 
   return (
-    <div className="flex items-center gap-4">
-      {PrimaryAction ?? AlternatePrimaryAction}
-      {SecondaryAction && SecondaryAction}
+    <div className="flex flex-wrap items-center justify-start gap-2 sm:gap-4">
+      <div className="flex-grow">{PrimaryAction ?? AlternatePrimaryAction}</div>
+      {SecondaryAction && <div className="flex-shrink-0">{SecondaryAction}</div>}
     </div>
   );
 };

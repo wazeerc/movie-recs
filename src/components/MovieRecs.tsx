@@ -1,4 +1,4 @@
-import React, { useMemo, useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useMemo, useRef } from "react";
 
 import { useMoviesContext } from "@/Context";
 import genRecommendations from "@/utils/recommendations";
@@ -27,9 +27,11 @@ const MovieRecs: React.FC = () => {
     queryFn: fetchMovies,
   });
 
-  if (isSuccess && data) {
-    populateAvailableMovies(data);
-  }
+  useEffect(() => {
+    if (isSuccess && data) {
+      populateAvailableMovies(data);
+    }
+  }, [isSuccess, data, populateAvailableMovies]);
 
   const movies: SelectSearchOption[] = useMemo(
     () => generateMovieOptionsForSearch(availableMovies),

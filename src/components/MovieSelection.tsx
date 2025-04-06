@@ -1,5 +1,5 @@
 import "./styles/SelectSearch.css";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import useEffectWithMount from "@/hooks/useEffectWithMount";
 import SelectSearch, { SelectedOptionValue, SelectSearchOption } from "react-select-search";
 
@@ -38,10 +38,7 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
     }
   };
 
-  const hideDropdown = (
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    _selectedMoviesLength: number = selectMovieOptions.length,
-  ): void => {
+  const hideDropdown = (): void => {
     const dropdownElement = document.querySelector(".select-search-select") as HTMLDivElement;
 
     if (dropdownElement) {
@@ -50,8 +47,11 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
     }
   };
 
-  const isSearchDisabled = (): boolean => {
+  useEffect(() => {
     hideDropdown();
+  }, [areMaxMoviesSelected]);
+
+  const isSearchDisabled = (): boolean => {
     return areMaxMoviesSelected; // Disable search bar when 3 movies are selected
   };
 
@@ -77,7 +77,6 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
   const removeMovieFromSelections = (movieToDelete: string): void => {
     setSelectedMovieOptions(prevSelectedMovies => {
       const updatedMovies = prevSelectedMovies.filter(movie => movie !== movieToDelete);
-      hideDropdown(updatedMovies.length);
       return updatedMovies;
     });
     addSelectedMovies(prevSelectedMovies =>
@@ -91,7 +90,6 @@ const MovieSelection: React.FC<IMovieSelectionProps> = props => {
     setSelectedMovieOptions([]);
     addSelectedMovies([]);
     setRecommendations([]);
-    hideDropdown(0);
     toggleSearchBar();
   };
   //#endregion
